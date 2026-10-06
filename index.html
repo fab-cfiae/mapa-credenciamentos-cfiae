@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mapa de Credenciamentos - CFIAe</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         CABEÇALHO INSTITUCIONAL
+    ========================================================== -->
+
+    <header class="header-cfiae">
+
+        <div class="top-bar">
+            <div class="header-container">
+
+                <div class="brand-area">
+                    <img
+                        src="logo.png"
+                        alt="Logo CFIAe"
+                        class="header-logo"
+                    >
+
+                    <div class="header-titles">
+                        <span class="sub-title">
+                            Força Aérea Brasileira
+                        </span>
+
+                        <h1 class="main-title">
+                            Caixa de Financiamento<br>
+                            Imobiliário da Aeronáutica
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+
+                    <button
+                        id="btn-reset"
+                        class="header-action-btn"
+                        title="Redefinir visão"
+                    >
+                        <i data-lucide="rotate-ccw"></i>
+                        <span>Redefinir Visão</span>
+                    </button>
+
+                    <a
+                        href="#"
+                        class="header-action-btn"
+                        title="Portal Oficial"
+                    >
+                        <i data-lucide="external-link"></i>
+                        <span>Portal Oficial</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sub-bar">
+            <div class="sub-bar-container">
+
+                <span class="slogan">
+                    "UM SONHO, UM IDEAL, UMA MORADIA DIGNA!"
+                </span>
+
+                <div class="sub-bar-info">
+                    <span>
+                        <i data-lucide="map"></i>
+                        Cobertura Nacional
+                    </span>
+
+                    <span>
+                        <i data-lucide="calendar-days"></i>
+                        Atualizado em 2026
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         CONTEÚDO PRINCIPAL
+    ========================================================== -->
+
+    <main class="main-content">
+
+        <div class="dashboard-container">
+
+            <!-- =================================================
+                 TÍTULO DA PÁGINA
+            ================================================== -->
+
+            <section class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        <i data-lucide="building-2"></i>
+                        Rede de Credenciamento
+                    </span>
+
+                    <h2>
+                        Mapa de Credenciamentos
+                    </h2>
+
+                    <p>
+                        Consulte a distribuição regional das empresas
+                        credenciadas e habilitadas pela CFIAe.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CARDS DE INDICADORES
+            ================================================== -->
+
+            <section class="metrics-grid">
+
+                <article class="metric-card">
+
+                    <div class="metric-icon blue">
+                        <i data-lucide="building-2"></i>
+                    </div>
+
+                    <div class="metric-content">
+                        <span class="metric-label">
+                            Empresas Credenciadas
+                        </span>
+
+                        <strong id="metric-total">
+                            90
+                        </strong>
+
+                        <span class="metric-description">
+                            Empresas cadastradas na rede
+                        </span>
+                    </div>
+
+                </article>
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon green">
+                        <i data-lucide="map-pinned"></i>
+                    </div>
+
+                    <div class="metric-content">
+                        <span class="metric-label">
+                            Regiões Atendidas
+                        </span>
+
+                        <strong id="metric-regioes">
+                            5
+                        </strong>
+
+                        <span class="metric-description">
+                            Regiões brasileiras
+                        </span>
+                    </div>
+
+                </article>
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon orange">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+
+                    <div class="metric-content">
+                        <span class="metric-label">
+                            Maior Concentração
+                        </span>
+
+                        <strong id="metric-maior-regiao">
+                            Sudeste
+                        </strong>
+
+                        <span
+                            class="metric-description"
+                            id="metric-maior-regiao-qtd"
+                        >
+                            26 empresas
+                        </span>
+                    </div>
+
+                </article>
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon purple">
+                        <i data-lucide="map"></i>
+                    </div>
+
+                    <div class="metric-content">
+                        <span class="metric-label">
+                            Estados Abrangidos
+                        </span>
+
+                        <strong id="metric-estados">
+                            27
+                        </strong>
+
+                        <span class="metric-description">
+                            Cobertura em todo o território nacional
+                        </span>
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 ÁREA DE TRABALHO
+            ================================================== -->
+
+            <section class="workspace-grid">
+
+
+                <!-- =============================================
+                     PAINEL DO MAPA
+                ============================================== -->
+
+                <div class="map-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <div class="panel-title-row">
+                                <i data-lucide="map"></i>
+
+                                <h3>
+                                    Distribuição Nacional
+                                </h3>
+                            </div>
+
+                            <p>
+                                Selecione uma região ou clique em um estado
+                                para consultar seus credenciamentos.
+                            </p>
+                        </div>
+
+                        <span class="panel-status">
+                            <span class="status-dot"></span>
+                            Mapa Interativo
+                        </span>
+
+                    </div>
+
+
+                    <!-- Filtros -->
+
+                    <div class="region-filters">
+
+                        <button
+                            class="region-filter active"
+                            data-region="todos"
+                        >
+                            <span class="filter-dot"></span>
+                            Todas
+                        </button>
+
+                        <button
+                            class="region-filter"
+                            data-region="Norte"
+                        >
+                            Norte
+                        </button>
+
+                        <button
+                            class="region-filter"
+                            data-region="Nordeste"
+                        >
+                            Nordeste
+                        </button>
+
+                        <button
+                            class="region-filter"
+                            data-region="CentroOeste"
+                        >
+                            Centro-Oeste
+                        </button>
+
+                        <button
+                            class="region-filter"
+                            data-region="Sudeste"
+                        >
+                            Sudeste
+                        </button>
+
+                        <button
+                            class="region-filter"
+                            data-region="Sul"
+                        >
+                            Sul
+                        </button>
+
+                    </div>
+
+
+                    <!-- Mapa -->
+
+                    <div class="map-area">
+
+                        <div class="map-loading" id="map-loading">
+                            <i data-lucide="loader-circle"></i>
+                            <span>Carregando mapa...</span>
+                        </div>
+
+                        <object
+                            data="mapa_brasil.svg"
+                            type="image/svg+xml"
+                            id="mapa"
+                            aria-label="Mapa do Brasil"
+                        ></object>
+
+                    </div>
+
+
+                    <div class="map-footer">
+
+                        <div class="map-legend">
+
+                            <span class="legend-item">
+                                <span class="legend-color available"></span>
+                                Região disponível
+                            </span>
+
+                            <span class="legend-item">
+                                <span class="legend-color selected"></span>
+                                Região selecionada
+                            </span>
+
+                        </div>
+
+                        <span class="map-instruction">
+                            <i data-lucide="mouse-pointer-click"></i>
+                            Clique no mapa para consultar
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     PAINEL DE INFORMAÇÕES
+                ============================================== -->
+
+                <aside class="details-panel">
+
+                    <div class="details-header">
+
+                        <div class="details-icon">
+                            <i data-lucide="building-2"></i>
+                        </div>
+
+                        <div>
+                            <span class="details-eyebrow">
+                                REGIÃO SELECIONADA
+                            </span>
+
+                            <h3 id="details-region-title">
+                                Brasil
+                            </h3>
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="details-empty"
+                        id="details-empty"
+                    >
+
+                        <div class="empty-icon">
+                            <i data-lucide="map-pinned"></i>
+                        </div>
+
+                        <h4>
+                            Selecione uma região
+                        </h4>
+
+                        <p>
+                            Clique em uma região no mapa ou utilize
+                            os filtros acima para visualizar as
+                            empresas credenciadas.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="details-content hidden"
+                        id="details-content"
+                    >
+
+                        <div class="region-summary">
+
+                            <div class="summary-number">
+                                <strong id="details-count">
+                                    0
+                                </strong>
+
+                                <span>
+                                    empresas
+                                </span>
+                            </div>
+
+                            <div class="summary-label">
+                                Empresas Credenciadas
+                            </div>
+
+                        </div>
+
+
+                        <div class="details-divider"></div>
+
+
+                        <div class="companies-heading">
+
+                            <div>
+                                <span>
+                                    Empresas Credenciadas
+                                </span>
+
+                                <small>
+                                    Habilitadas na região
+                                </small>
+                            </div>
+
+                            <button
+                                id="btn-view-all"
+                                class="view-all-btn"
+                            >
+                                Ver lista
+                                <i data-lucide="arrow-right"></i>
+                            </button>
+
+                        </div>
+
+
+                        <ul
+                            id="details-companies-list"
+                            class="companies-list"
+                        >
+                        </ul>
+
+                    </div>
+
+                </aside>
+
+            </section>
+
+
+            <!-- =================================================
+                 RODAPÉ INFORMATIVO
+            ================================================== -->
+
+            <section class="information-strip">
+
+                <div class="information-icon">
+                    <i data-lucide="info"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Como consultar?
+                    </strong>
+
+                    <p>
+                        Escolha uma região nos filtros ou clique
+                        diretamente em qualquer estado do mapa.
+                        As empresas credenciadas correspondentes
+                        serão apresentadas no painel ao lado.
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+         MODAL — LISTA COMPLETA DE EMPRESAS
+    ========================================================== -->
+
+    <div
+        id="modal-empresas"
+        class="modal-overlay hidden"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-card"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <button
+                id="modal-close"
+                class="modal-close-btn"
+                aria-label="Fechar"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+
+            <div class="modal-header">
+
+                <div class="modal-header-icon">
+                    <i data-lucide="building-2"></i>
+                </div>
+
+                <div>
+                    <span class="modal-eyebrow">
+                        EMPRESAS CREDENCIADAS
+                    </span>
+
+                    <h2
+                        id="modal-region-title"
+                        class="modal-title"
+                    >
+                        Região
+                    </h2>
+                </div>
+
+                <span
+                    id="modal-badge"
+                    class="modal-badge"
+                >
+                    0 empresas
+                </span>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <p class="modal-subtitle">
+                    Empresas Credenciadas Habilitadas
+                </p>
+
+                <ul
+                    id="modal-empresas-list"
+                    class="modal-list"
+                >
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
