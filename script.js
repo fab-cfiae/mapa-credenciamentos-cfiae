@@ -6,14 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const mapa = document.getElementById("mapa");
 
-    const modal = document.getElementById("modal-empresas");
-    const modalClose = document.getElementById("modal-close");
-    const modalTitle = document.getElementById("modal-region-title");
-    const modalBadge = document.getElementById("modal-badge");
-    const modalList = document.getElementById("modal-empresas-list");
-
     const btnReset = document.getElementById("btn-reset");
-    const btnViewAll = document.getElementById("btn-view-all");
 
     const detailsEmpty = document.getElementById("details-empty");
     const detailsContent = document.getElementById("details-content");
@@ -245,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let mapaInicializado = false;
     let regiaoSelecionada = null;
+    let todasRegioesSelecionadas = true;
     let svg = null;
 
 
@@ -310,76 +304,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       ABRIR MODAL
-    ========================================================== */
-
-    function abrirModal(dadosRegiao) {
-
-        modalTitle.textContent = dadosRegiao.nome;
-
-        modalBadge.textContent =
-            `${dadosRegiao.empresas.length} empresa(s)`;
-
-
-        modalList.innerHTML =
-            dadosRegiao.empresas
-                .map(emp => `<li>${emp}</li>`)
-                .join("");
-
-
-        modal.classList.remove("hidden");
-
-        modal.setAttribute("aria-hidden", "false");
-
-        document.body.style.overflow = "hidden";
-    }
-
-
-    /* =========================================================
-       FECHAR MODAL
-    ========================================================== */
-
-    function fecharModal() {
-
-        modal.classList.add("hidden");
-
-        modal.setAttribute("aria-hidden", "true");
-
-        document.body.style.overflow = "";
-    }
-
-
-    modalClose.addEventListener(
-        "click",
-        fecharModal
-    );
-
-
-    modal.addEventListener(
-        "click",
-        function (e) {
-
-            if (e.target === modal) {
-                fecharModal();
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        function (e) {
-
-            if (e.key === "Escape") {
-                fecharModal();
-            }
-
-        }
-    );
-
-
-    /* =========================================================
        ATUALIZA PAINEL DE DETALHES
     ========================================================== */
 
@@ -395,6 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         regiaoSelecionada = chaveRegiao;
+        todasRegioesSelecionadas = false;
 
 
         detailsEmpty.classList.add("hidden");
@@ -410,28 +335,11 @@ document.addEventListener("DOMContentLoaded", function () {
             dadosRegiao.empresas.length;
 
 
-        /*
-         * Mostra inicialmente apenas parte
-         * da lista para manter o painel limpo.
-         */
-
-        const empresasVisiveis =
-            dadosRegiao.empresas.slice(0, 8);
-
-
+        // Exibe todas as empresas no painel; a rolagem é controlada pelo CSS.
         detailsCompaniesList.innerHTML =
-            empresasVisiveis
+            dadosRegiao.empresas
                 .map(emp => `<li>${emp}</li>`)
                 .join("");
-
-
-        if (abrirLista) {
-
-            btnViewAll.onclick = function () {
-                abrirModal(dadosRegiao);
-            };
-
-        }
 
 
         destacarRegiaoNoMapa(chaveRegiao);
@@ -445,6 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function resetarVisao() {
 
         regiaoSelecionada = null;
+        todasRegioesSelecionadas = true;
 
         detailsContent.classList.add("hidden");
 
@@ -474,19 +383,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!estado) return;
 
                 estado.classList.remove(
-                    "region-selected",
                     "region-active",
                     "region-muted"
                 );
+                estado.classList.add("region-selected");
 
-                estado.style.fill =
-                    COR_PADRAO;
-
-                estado.style.filter =
-                    "none";
-
-                estado.style.opacity =
-                    "1";
+                estado.style.fill = COR_SELECIONADO;
+                estado.style.filter = "none";
+                estado.style.opacity = "1";
             });
     }
 
@@ -505,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chaveRegiao
     ) {
 
+        todasRegioesSelecionadas = false;
         if (!svg) return;
 
 
@@ -674,16 +579,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     el.style.opacity =
                         "0.32";
 
+                } else if (todasRegioesSelecionadas) {
+
+                    el.style.fill = COR_SELECIONADO;
+                    el.style.filter = "none";
+                    el.style.opacity = "1";
+
                 } else {
 
-                    el.style.fill =
-                        COR_PADRAO;
-
-                    el.style.filter =
-                        "none";
-
-                    el.style.opacity =
-                        "1";
+                    el.style.fill = COR_PADRAO;
+                    el.style.filter = "none";
+                    el.style.opacity = "1";
                 }
             }
         });
@@ -825,6 +731,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
                 });
+
+
+            // Estado inicial: botão "Todas" ativo e as cinco regiões destacadas.
+            resetarVisao();
 
 
             /*
