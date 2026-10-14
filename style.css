@@ -1028,10 +1028,13 @@ body {
     gap: 6px;
 
     overflow-y: auto;
+    overscroll-behavior: contain;
+    flex: 1 1 auto;
+    min-height: 0;
+    /* Só ativa a rolagem quando a lista realmente ocupa mais espaço. */
+    max-height: min(65vh, 620px);
 
-    max-height: 400px;
-
-    padding-right: 3px;
+    padding-right: 6px;
 }
 
 .companies-list li {
@@ -1380,7 +1383,7 @@ body {
     }
 
     .companies-list {
-        max-height: 300px;
+        max-height: min(60vh, 520px);
     }
 }
 
